@@ -77,7 +77,7 @@ public class LinkedList<T> {
      */
     public void removeRepeats() {
         Node<T> current = head;
-        Node<T> compare = head.getNext();
+        Node<T> compare = current.getNext();
         if(!isEmpty()){
             while(current!=null){
                 while(compare!=null){
