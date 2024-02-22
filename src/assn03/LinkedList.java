@@ -20,15 +20,20 @@ public class LinkedList<T> {
      */
     
     public void removeAtIndex(int i) {
-        if(i >= size){
-            throw new IndexOutOfBoundsException("Out of bounds: Size of "+size +" , Index at "+i);
-        }
+        validIndex(i);
         Node<T> current = head;
-        Node<T> prev = null;
-        for(int j=0;j<i;j++){
-            current = current.getNext();
+        if(i==0){
+            head = current.getNext();
+            size--;
+        }else{
+            Node<T> prev = null;
+            for(int j=0;j<i;j++){
+                prev = current;
+                current = current.getNext();
+            }
+            prev.setNext(current.getNext());
+            size--;
         }
-        remove(current);
     }
 
 
@@ -50,20 +55,23 @@ public class LinkedList<T> {
      * @return true if the lists have the same elements in the same order, false otherwise
      */
     public boolean isEqual(LinkedList list2) {
-        if(!isEmpty()){
-            if(size == list2.size()){
-                Node<T>current1 = head;
+        if(isEmpty() || list2.isEmpty()){
+            return false;
+        }
+        else {
+            if (size == list2.size()) {
+                Node<T> current1 = head;
                 Node<T> current2 = list2.getHead();
-                while(current1!=null){
-                    if(current1.getValue()!=current2.getValue()){
+                while (current1 != null) {
+                    if (current1.getValue() != current2.getValue()) {
                         return false;
                     }
                     current1 = current1.getNext();
                     current2 = current2.getNext();
                 }
-            }
+            } else return false;
+            return true;
         }
-        return true;
     }
 
 
@@ -77,19 +85,23 @@ public class LinkedList<T> {
      */
     public void removeRepeats() {
         Node<T> current = head;
-        Node<T> compare = current.getNext();
-        if(!isEmpty()){
+        Node<T> compare = null;
+        Node<T> prev = current;
+        int index = 0;
+        if(!isEmpty() && size > 1){
             while(current!=null){
+                compare = current.getNext();
+                prev = current;
                 while(compare!=null){
-                    if(current.getValue()==compare.getValue()){
-                        Node<T>removed = compare;
-                        compare = compare.getNext();
-                        remove(removed);
+                    //System.out.println("Current Value: "+current.getValue() +", Compare value: "+compare.getValue());
+                    if(compare.getValue()==current.getValue()){
+                        prev.setNext(compare.getNext());
+                    }else{
+                        prev = compare;
                     }
                     compare = compare.getNext();
                 }
                 current = current.getNext();
-                compare = current.getNext();
             }
         }
     }
@@ -141,6 +153,28 @@ public class LinkedList<T> {
      * @param list2
      */
     public void merge(LinkedList list2) {
+        Node<T> current1 = head;
+        Node<T> current2 = list2.getHead();
+        Node<T> nextNode  = null;
+//        for(int i=0;i<list2.size();i++){
+//            if(current1!=null){
+//                nextNode = current1.getNext();
+//                current1.setNext(current2);
+//                current2 = current2.getNext();
+//                current1 = current1.getNext();
+//                current1.setNext(nextNode);
+//                current1 = nextNode;
+//            }
+//        }
+        while(current2!=null){
+            nextNode = current1.getNext();
+            current1.setNext(current2);
+            current2 = current2.getNext();
+            current1 = current1.getNext();
+            current1.setNext(nextNode);
+            current1 = nextNode;
+            size++;
+        }
     }
 
 
