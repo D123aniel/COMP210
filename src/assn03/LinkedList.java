@@ -23,7 +23,12 @@ public class LinkedList<T> {
         if(i >= size){
             throw new IndexOutOfBoundsException("Out of bounds: Size of "+size +" , Index at "+i);
         }
-
+        Node<T> current = head;
+        Node<T> prev = null;
+        for(int j=0;j<i;j++){
+            current = current.getNext();
+        }
+        remove(current);
     }
 
 
@@ -45,7 +50,20 @@ public class LinkedList<T> {
      * @return true if the lists have the same elements in the same order, false otherwise
      */
     public boolean isEqual(LinkedList list2) {
-        return false;
+        if(!isEmpty()){
+            if(size == list2.size()){
+                Node<T>current1 = head;
+                Node<T> current2 = list2.getHead();
+                while(current1!=null){
+                    if(current1.getValue()!=current2.getValue()){
+                        return false;
+                    }
+                    current1 = current1.getNext();
+                    current2 = current2.getNext();
+                }
+            }
+        }
+        return true;
     }
 
 
@@ -58,10 +76,23 @@ public class LinkedList<T> {
      *
      */
     public void removeRepeats() {
+        Node<T> current = head;
+        Node<T> compare = head.getNext();
+        if(!isEmpty()){
+            while(current!=null){
+                while(compare!=null){
+                    if(current.getValue()==compare.getValue()){
+                        Node<T>removed = compare;
+                        compare = compare.getNext();
+                        remove(removed);
+                    }
+                    compare = compare.getNext();
+                }
+                current = current.getNext();
+                compare = current.getNext();
+            }
+        }
     }
-
-
-
 
     /**
      * Task4
@@ -72,6 +103,19 @@ public class LinkedList<T> {
      *
      */
     public void reverse() {
+        if(!isEmpty()) {
+            Node<T> current = head;
+            Node<T> prev = null;
+            Node<T> next = null;
+            tail = head;
+            while(current != null){
+                next = current.getNext();
+                current.setNext(prev);
+                prev = current;
+                current = next;
+            }
+            head = prev;
+        }
     }
 
 
