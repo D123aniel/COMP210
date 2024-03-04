@@ -73,6 +73,9 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 	}
 	
 	// TODO: remove all in range (inclusive)
+	
+
+
 	@Override
 	public BST<T> remove_range(T start, T end) {
 		if(isEmpty()){
@@ -81,10 +84,10 @@ public class NonEmptyBST<T extends Comparable<T>> implements BST<T> {
 		_left = _left.remove_range(start,end);
 		_right = _right.remove_range(start,end);
 
-		System.out.println("Element: "+_element+ ", Compare(start): "+_element.compareTo(start) +", Compare(end): "+_element.compareTo(end));
+		//System.out.println("Element: "+_element+ ", Compare(start): "+_element.compareTo(start) +", Compare(end): "+_element.compareTo(end));
 		if(_element.compareTo(start)>=0 && _element.compareTo(end)<=0){
 			//System.out.println("Remove!");
-			this.remove_help(_element); //Gets to here but then... doesn't remove?
+			return this.remove_help(_element); //Gets to here but then... doesn't remove?
 		}
 
 		return this;
