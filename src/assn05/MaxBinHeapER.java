@@ -54,13 +54,49 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
     // TODO (Task 2A): dequeue
     @Override
     public V dequeue() {
-         return null;
+        Prioritized<V,P> root = _heap.get(0);
+        if(size() == 0 ){
+            return null;
+        } 
+        else if(size() == 1) {
+            return _heap.remove(0).getValue();
+        }
+        else{
+            Prioritized<V,P> successor = _heap.get(size()-1);
+            _heap.set(0, successor);
+            _heap.remove(size()-1);
+            int parentIndex = 0;
+            int leftChildIndex = 2*parentIndex + 1;
+            int rightChildIndex = 2*parentIndex + 2;
+            while(leftChildIndex < size()){
+                if(_heap.get(leftChildIndex).compareTo(_heap.get(rightChildIndex)) > 0){
+                    if(_heap.get(leftChildIndex).compareTo(_heap.get(parentIndex)) > 0){
+                        Prioritized<V,P> temp = _heap.get(parentIndex);
+                        _heap.set(parentIndex, _heap.get(leftChildIndex));
+                        _heap.set(leftChildIndex, temp);
+                        parentIndex = leftChildIndex;
+                    }else if (_heap.get(rightChildIndex).compareTo(_heap.get(parentIndex)) > 0){
+                        Prioritized<V,P> temp = _heap.get(parentIndex);
+                        _heap.set(parentIndex, _heap.get(rightChildIndex));
+                        _heap.set(rightChildIndex, temp);
+                        parentIndex = rightChildIndex;
+                    }else break;
+                }
+                leftChildIndex = 2*parentIndex + 1;
+                rightChildIndex = 2*parentIndex + 2;
+            }
+        }
+         return root.getValue();
     }
 
     // TODO (Task 2A): getMax
+    //return the largest value, not priority, in the heap without removing it
     @Override
     public V getMax() {
-    	 return null;
+        if(size() == 0){
+            return null;
+        }
+        return _heap.get(0).getValue();
     }
 
     // TODO (part 2B) : updatePriority
