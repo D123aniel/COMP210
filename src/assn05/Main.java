@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         testP1();
         testP2();
-//        testP3();
+        testP3();
         testP4();
     }
 
@@ -75,12 +75,12 @@ public class Main {
     }
 
     public static void fillER(MaxBinHeapER complexER) {
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 100000; i++) {
             complexER.enqueue(i);
         }
     }
     public static void fillER(SimpleEmergencyRoom simpleER) {
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 100000; i++) {
             simpleER.addPatient(i);
         }
     }
@@ -95,6 +95,7 @@ public class Main {
 
     public static double[] compareRuntimes() {
         // Array which you will populate as part of Part 4
+        int arrSize = 100000;
         double[] results = new double[4];
 
         SimpleEmergencyRoom simplePQ = new SimpleEmergencyRoom();
@@ -102,24 +103,24 @@ public class Main {
 
         // Code for (Task 4.1) Here
         long startTime = System.nanoTime();
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < arrSize; i++) {
             simplePQ.dequeue();
         }
         long endTime = System.nanoTime();
         results[0] = (endTime - startTime);
-        results[1] = results[0] / 100000;
+        results[1] = results[0] / arrSize;
 
         MaxBinHeapER binHeap = new MaxBinHeapER();
         fillER(binHeap);
 
         // Code for (Task 4.2) Here
         startTime = System.nanoTime();
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < arrSize; i++) {
             binHeap.dequeue();
         }
         endTime = System.nanoTime();
         results[2] = (endTime - startTime);
-        results[3] = results[2] / 100000;
+        results[3] = results[2] / arrSize;
         return results;
     }
 
