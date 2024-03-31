@@ -46,6 +46,8 @@ public class Main {
         System.out.println("Complex ER size: " + complexER.size());
         System.out.println("Dequeue: " + complexER.dequeue());
         System.out.println(complexER.toString());
+        complexER.updatePriority("Bob8", 1);
+        System.out.println(complexER.toString());
     }
 
     /*
@@ -55,8 +57,7 @@ public class Main {
         MaxBinHeapER transfer = new MaxBinHeapER(makePatients());
         Prioritized[] arr = transfer.getAsArray();
         for(int i = 0; i < transfer.size(); i++) {
-            System.out.println("Value: " + arr[i].getValue()
-                    + ", Priority: " + arr[i].getPriority());
+            System.out.println("Value: " + arr[i].getValue()+ ", Priority: " + arr[i].getPriority());
         }
     }
 
@@ -67,16 +68,19 @@ public class Main {
                /*
         Part 4 - Write some tests to convince yourself that your code for Part 4 is working
          */
+        double[] results = compareRuntimes();
+        System.out.println("Simple ER Dequeue Time: " + results[0] + " Average: " + results[1]);
+        System.out.println("Complex ER Dequeue Time: " + results[2] + " Average: " + results[3]);
 
     }
 
     public static void fillER(MaxBinHeapER complexER) {
-        for(int i = 0; i < 100000; i++) {
+        for(int i = 0; i < 100; i++) {
             complexER.enqueue(i);
         }
     }
     public static void fillER(SimpleEmergencyRoom simpleER) {
-        for(int i = 0; i < 100000; i++) {
+        for(int i = 0; i < 100; i++) {
             simpleER.addPatient(i);
         }
     }
@@ -97,13 +101,25 @@ public class Main {
         fillER(simplePQ);
 
         // Code for (Task 4.1) Here
-
+        long startTime = System.nanoTime();
+        for(int i = 0; i < 100; i++) {
+            simplePQ.dequeue();
+        }
+        long endTime = System.nanoTime();
+        results[0] = (endTime - startTime);
+        results[1] = results[0] / 100000;
 
         MaxBinHeapER binHeap = new MaxBinHeapER();
         fillER(binHeap);
 
         // Code for (Task 4.2) Here
-
+        startTime = System.nanoTime();
+        for(int i = 0; i < 100; i++) {
+            binHeap.dequeue();
+        }
+        endTime = System.nanoTime();
+        results[2] = (endTime - startTime);
+        results[3] = results[2] / 100000;
         return results;
     }
 
