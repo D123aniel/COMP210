@@ -54,11 +54,11 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
     // TODO (Task 2A): dequeue
     @Override
     public V dequeue() {
-        Prioritized<V,P> root = _heap.get(0);
         if(size() == 0 ){
             return null;
         } 
-        else if(size() == 1) {
+        Prioritized<V,P> root = _heap.get(0);
+        if(size() == 1) {
             return _heap.remove(0).getValue();
         }
         else{
@@ -68,22 +68,35 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
             int parentIndex = 0;
             int leftChildIndex = 2*parentIndex + 1;
             int rightChildIndex = 2*parentIndex + 2;
-            while(leftChildIndex < size()){
-                if(_heap.get(leftChildIndex).compareTo(_heap.get(rightChildIndex)) > 0){
-                    if(_heap.get(leftChildIndex).compareTo(_heap.get(parentIndex)) > 0){
-                        Prioritized<V,P> temp = _heap.get(parentIndex);
-                        _heap.set(parentIndex, _heap.get(leftChildIndex));
-                        _heap.set(leftChildIndex, temp);
-                        parentIndex = leftChildIndex;
-                    }else if (_heap.get(rightChildIndex).compareTo(_heap.get(parentIndex)) > 0){
-                        Prioritized<V,P> temp = _heap.get(parentIndex);
-                        _heap.set(parentIndex, _heap.get(rightChildIndex));
-                        _heap.set(rightChildIndex, temp);
-                        parentIndex = rightChildIndex;
-                    }else break;
-                }
+            while(leftChildIndex < size()){ //Check if valid children
                 leftChildIndex = 2*parentIndex + 1;
                 rightChildIndex = 2*parentIndex + 2;
+                //Only left child
+                if(rightChildIndex >= size() && _heap.get(leftChildIndex).compareTo(_heap.get(parentIndex)) > 0){ //left child is greater than parent
+                    Prioritized<V,P> temp = _heap.get(parentIndex);
+                    _heap.set(parentIndex, _heap.get(leftChildIndex));
+                    _heap.set(leftChildIndex, temp);
+                    parentIndex = leftChildIndex;
+                }
+                //Both children
+                else if(leftChildIndex < size() && rightChildIndex < size()){ //Valid children
+                    if(_heap.get(leftChildIndex).compareTo(_heap.get(rightChildIndex)) > 0){ //left child is greater than right child
+                        if(_heap.get(leftChildIndex).compareTo(_heap.get(parentIndex)) > 0){ //left child is greater than parent
+                            Prioritized<V,P> temp = _heap.get(parentIndex);
+                            _heap.set(parentIndex, _heap.get(leftChildIndex));
+                            _heap.set(leftChildIndex, temp);
+                            parentIndex = leftChildIndex;
+                        }
+                    }
+                    else if(_heap.get(rightChildIndex).compareTo(_heap.get(leftChildIndex)) > 0){ //right child is greater than left child
+                        if (_heap.get(rightChildIndex).compareTo(_heap.get(parentIndex)) > 0){ //right child is greater than parent
+                            Prioritized<V,P> temp = _heap.get(parentIndex);
+                            _heap.set(parentIndex, _heap.get(rightChildIndex));
+                            _heap.set(rightChildIndex, temp);
+                            parentIndex = rightChildIndex;
+                        }
+                    }
+                } else break;
             }
         }
          return root.getValue();
@@ -101,6 +114,7 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
 
     // TODO (part 2B) : updatePriority
     public void updatePriority(V value, P newPriority) {
+
     }
 
     /**
@@ -116,4 +130,11 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
         return _heap.toArray(result);
     }
 
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Prioritized<V,P> p : _heap) {
+            sb.append(p.getValue() + " ");
+        }
+        return sb.toString();
+    }
 }

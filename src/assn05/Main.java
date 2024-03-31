@@ -23,6 +23,7 @@ public class Main {
         simpleER.addPatient("Bob5",50);
         System.out.println("Simple ER size: " + simpleER.size());
         System.out.println("Dequeue: " + simpleER.dequeue().getValue());
+
     }
 
     // test Part 2
@@ -30,6 +31,21 @@ public class Main {
        /*
         Part 2 - Write some tests to convince yourself that your code for Part 2 is working
          */
+        MaxBinHeapER complexER = new MaxBinHeapER();
+        System.out.println("Dequeue, Empty: " + complexER.dequeue());
+        complexER.enqueue("Bob1",10);
+        //System.out.println("Dequeue, One Element: " + complexER.dequeue());
+        complexER.enqueue("Bob2",20);
+        complexER.enqueue("Bob3",30);
+        complexER.enqueue("Bob4",40);
+        complexER.enqueue("Bob5",50);
+        complexER.enqueue("Bob6",60);
+        complexER.enqueue("Bob7",70);
+        complexER.enqueue("Bob8",80);
+        complexER.enqueue("Bob9",90);
+        System.out.println("Complex ER size: " + complexER.size());
+        System.out.println("Dequeue: " + complexER.dequeue());
+        System.out.println(complexER.toString());
     }
 
     /*
