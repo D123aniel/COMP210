@@ -3,10 +3,11 @@ package assn05;
 public class Main {
 
     public static void main(String[] args) {
-        testP1();
-        testP2();
-        testP3();
-        testP4();
+        // testP1();
+        // testP2();
+        testP2b();
+        // testP3();
+        // testP4();
     }
 
     // test Part 1
@@ -46,7 +47,20 @@ public class Main {
         System.out.println("Complex ER size: " + complexER.size());
         System.out.println("Dequeue: " + complexER.dequeue());
         System.out.println(complexER.toString());
-        complexER.updatePriority("Bob8", 1);
+    }
+
+    public static void testP2b(){
+        MaxBinHeapER complexER = new MaxBinHeapER<>();
+        complexER.enqueue("Bob2",20);
+        complexER.enqueue("Bob3",30);
+        // complexER.enqueue("Bob4",40);
+        // complexER.enqueue("Bob5",50);
+        // complexER.enqueue("Bob6",60);
+        // complexER.enqueue("Bob7",70);
+        // complexER.enqueue("Bob8",80);
+        // complexER.enqueue("Bob9",90);
+        System.out.println(complexER.toString());
+        complexER.updatePriority("Bob2", 40);
         System.out.println(complexER.toString());
     }
 

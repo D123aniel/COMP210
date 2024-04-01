@@ -157,22 +157,8 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
                     break;
                 }
             }
-            //If the index priority is greater than parent, bubble up
-            int parentIndex = (index-1)/2;
-            //Priority is correct
-            if(_heap.get(index).compareTo(_heap.get(parentIndex)) < 0 && _heap.get(index).compareTo(_heap.get(2*index + 1)) > 0 && _heap.get(index).compareTo(_heap.get(2*index + 2)) > 0){
-                return;
-            }
-            //Priority is greater than parent, bubble up
-            else if(_heap.get(index).compareTo(_heap.get(parentIndex)) > 0){
-                bubbleUp(index);
-            }
-            //Priority is less than children, bubble down
-            else{
-                bubbleDown(index);
-            }
-            
-
+            bubbleUp(index);
+            bubbleDown(index);
         }
     }
 
