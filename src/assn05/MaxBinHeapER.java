@@ -95,16 +95,6 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
         int leftChildIndex = 2*index + 1;
         int rightChildIndex = 2*index + 2;
         while(leftChildIndex < size()){ //Check if valid children
-            //System.out.println("bruh");
-            //System.out.println("leftChildIndex: " + leftChildIndex + " rightChildIndex: " + rightChildIndex + " size: " + size() + " index: " + index);
-            
-            
-            //Issue with right child index right now
-            //Only left child
-            
-            // if(_heap.get(index).compareTo(_heap.get(leftChildIndex)) > 0 && _heap.get(index).compareTo(_heap.get(rightChildIndex)) > 0){ //parent is greater than children
-            //     break;
-            // }
             if(rightChildIndex >= size() && _heap.get(leftChildIndex).compareTo(_heap.get(index)) > 0){ //left child is greater than parent error here
                 Prioritized<V,P> temp = _heap.get(index);
                 _heap.set(index, _heap.get(leftChildIndex));
@@ -124,7 +114,6 @@ public class MaxBinHeapER  <V, P extends Comparable<P>> implements BinaryHeap<V,
                         index = leftChildIndex;
                     }else break;
                 }
-                //if(_heap.get(rightChildIndex).compareTo(_heap.get(leftChildIndex)) > 0)
                 else { //right child is greater than left child
                     if (_heap.get(rightChildIndex).compareTo(_heap.get(index)) > 0){ //right child is greater than parent
                         Prioritized<V,P> temp = _heap.get(index);
