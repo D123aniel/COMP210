@@ -19,14 +19,23 @@ public class PasswordManager<K,V> implements Map<K,V> {
         int hash = key.hashCode();
         int index = Math.abs(hash % _passwords.length);
         Account<K,V> newAccount = new Account<>(key, value);
-        if (_passwords[index] == null) {
+        if(_passwords[index] == null || _passwords[index].getWebsite().equals(key)) {
             _passwords[index] = newAccount;
         } else {
             Account<K,V> current = _passwords[index];
+            boolean changed = false;
             while (current.getNext() != null) {
+                if(_passwords[index].getWebsite().equals(key)){
+                    current = newAccount;
+                    changed = true;
+                    break;
+                }
                 current = current.getNext();
             }
-            current.setNext(newAccount);
+            if(!changed){
+                current.setNext(newAccount);
+            }
+
         }
 
      }

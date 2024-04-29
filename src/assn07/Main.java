@@ -46,19 +46,31 @@ public class Main {
                         System.out.println("Account deleted");
                     }
                     break;
-                case "Get Accounts":
+                case "Check duplicate password":
+                    password = scanner.nextLine();
+                    List<String> accounts_1 = passwordManager.checkDuplicate(password);
+                    if(accounts_1.size() == 0){
+                        System.out.println("No account uses that password");
+                    }else{
+                        System.out.println("Websites using that password:");
+                        for(String account : accounts_1){
+                            System.out.println(account);
+                        }
+                    }
+                    break;
+                case "Get accounts":
                     Set<String> accounts = passwordManager.keySet();
                     System.out.println("Your accounts:");
                     for(String account : accounts){
                         System.out.println(account);
                     }
                     break;
-                case "Generate Random Password":
+                case "Generate random password":
                     int len = scanner.nextInt();
                     password = passwordManager.generatesafeRandomPassword(len);
                     System.out.println(password);
                     break;
-                case "exit":
+                case "Exit":
                     System.exit(0);
                     break;
                 default:
