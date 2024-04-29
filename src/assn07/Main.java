@@ -1,6 +1,7 @@
 package assn07;
 
 import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -13,8 +14,8 @@ public class Main {
         // infite loop to go back to "Enter master password"
         while(true){
             System.out.println("Enter Master Password");
-            String input = Scanner.nextLine();
-            if(input.equals(passwordManager.MASTER_PASSWORD)){
+            String input = scanner.nextLine();
+            if(passwordManager.checkMasterPassword(input)){
                 break;
             }
         }
@@ -28,8 +29,8 @@ public class Main {
                     System.out.println("New password added");
                     break;
                 case "Get password":
-                    String webName = scanner.nextLine();
-                    String password = passwordManager.get(webName);
+                    webName = scanner.nextLine();
+                    password = passwordManager.get(webName);
                     if(password == null){
                         System.out.println("Account does not exist");
                     }else{
@@ -37,7 +38,7 @@ public class Main {
                     }
                     break;
                 case "Delete Account":
-                    String webName = scanner.nextLine();
+                    webName = scanner.nextLine();
                     String removed = passwordManager.remove(webName);
                     if(removed == null){
                         System.out.println("Account does not exist");
@@ -54,7 +55,7 @@ public class Main {
                     break;
                 case "Generate Random Password":
                     int len = scanner.nextInt();
-                    String password = generateRandomPassword(len);
+                    password = passwordManager.generatesafeRandomPassword(len);
                     System.out.println(password);
                     break;
                 case "exit":

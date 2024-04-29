@@ -3,6 +3,7 @@ package assn07;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.*;
 
 public class PasswordManager<K,V> implements Map<K,V> {
     private static final String MASTER_PASSWORD = "password321";
@@ -52,7 +53,7 @@ public class PasswordManager<K,V> implements Map<K,V> {
         for (Account<K,V> index : _passwords) {
             if (index != null) {
                 size++;
-                Account<K,V> current = account;
+                Account<K,V> current = index;
                 while (current.getNext() != null) {
                     size++;
                     current = current.getNext();
@@ -65,7 +66,7 @@ public class PasswordManager<K,V> implements Map<K,V> {
     // TODO: keySet
     @Override
     public Set<K> keySet() {
-        Set<K> keys = new Set<>();
+        Set<K> keys = new HashSet<>();
         for (Account<K,V> index : _passwords) {
             if (index != null) {
                 keys.add(index.getWebsite());
@@ -104,7 +105,7 @@ public class PasswordManager<K,V> implements Map<K,V> {
     // TODO: checkDuplicate
     @Override
     public List<K> checkDuplicate(V value) {
-        List<K> duplicate = new List<>();
+        List<K> duplicate = new ArrayList<>();
         for (Account<K,V> index : _passwords) {
             if (index != null) {
                 if (index.getPassword().equals(value)) {
