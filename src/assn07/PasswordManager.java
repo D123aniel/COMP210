@@ -78,11 +78,14 @@ public class PasswordManager<K,V> implements Map<K,V> {
         Set<K> keys = new HashSet<>();
         for (Account<K,V> index : _passwords) {
             if (index != null) {
+                System.out.println(index.getWebsite());
                 keys.add(index.getWebsite());
                 Account<K,V> current = index;
                 while (current.getNext() != null) {
-                    keys.add(current.getWebsite());
+                    System.out.println("bro?");
                     current = current.getNext();
+                    System.out.println(current.getWebsite() + "Hi!");
+                    keys.add(current.getWebsite());
                 }
             }
         }
