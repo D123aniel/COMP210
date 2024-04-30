@@ -76,7 +76,7 @@ public class PasswordManager<K,V> implements Map<K,V> {
     @Override
     //KeySet should be fine
     public Set<K> keySet() {
-        Set<K> keys = new HashSet<>();
+        Set<K> keys = new HashSet<K>();
         for (Account<K,V> index : _passwords) {
             if (index != null) {
 //                System.out.println(index.getWebsite());
@@ -118,7 +118,7 @@ public class PasswordManager<K,V> implements Map<K,V> {
     // TODO: checkDuplicate
     @Override
     public List<K> checkDuplicate(V value) {
-        List<K> duplicate = new ArrayList<>();
+        List<K> duplicate = new ArrayList<K>();
         for (Account<K,V> index : _passwords) {
             Account<K,V> current = index;
             while (current != null) {
