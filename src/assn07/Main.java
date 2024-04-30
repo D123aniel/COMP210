@@ -73,6 +73,12 @@ public class Main {
                 case "Exit":
                     System.exit(0);
                     break;
+                case "Print out all":
+                    Set<String> accounts_2 = passwordManager.keySet();
+                    for(String account : accounts_2){
+                        System.out.println(account + " " + passwordManager.get(account));
+                    }
+                    break;
                 default:
                     System.out.println("Command Not Found");
             }

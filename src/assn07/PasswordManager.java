@@ -74,17 +74,18 @@ public class PasswordManager<K,V> implements Map<K,V> {
 
     // TODO: keySet
     @Override
+    //KeySet should be fine
     public Set<K> keySet() {
         Set<K> keys = new HashSet<>();
         for (Account<K,V> index : _passwords) {
             if (index != null) {
-                System.out.println(index.getWebsite());
+//                System.out.println(index.getWebsite());
                 keys.add(index.getWebsite());
                 Account<K,V> current = index;
                 while (current.getNext() != null) {
-                    System.out.println("bro?");
+//                    System.out.println("bro?");
                     current = current.getNext();
-                    System.out.println(current.getWebsite() + "Hi!");
+//                    System.out.println(current.getWebsite() + "Hi!");
                     keys.add(current.getWebsite());
                 }
             }
@@ -119,17 +120,12 @@ public class PasswordManager<K,V> implements Map<K,V> {
     public List<K> checkDuplicate(V value) {
         List<K> duplicate = new ArrayList<>();
         for (Account<K,V> index : _passwords) {
-            if (index != null) {
-                if (index.getPassword().equals(value)) {
-                    duplicate.add(index.getWebsite());
+            Account<K,V> current = index;
+            while (current != null) {
+                if (current.getPassword().equals(value)) {
+                    duplicate.add(current.getWebsite());
                 }
-                Account<K,V> current = index;
-                while (current.getNext() != null) {
-                    if (current.getPassword().equals(value)) {
-                        duplicate.add(current.getWebsite());
-                    }
-                    current = current.getNext();
-                }
+                current = current.getNext();
             }
         }
         return duplicate;
