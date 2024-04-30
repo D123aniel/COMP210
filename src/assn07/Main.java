@@ -37,7 +37,7 @@ public class Main {
                         System.out.println(password);
                     }
                     break;
-                case "Delete Account":
+                case "Delete account":
                     webName = scanner.nextLine();
                     String removed = passwordManager.remove(webName);
                     if(removed == null){
