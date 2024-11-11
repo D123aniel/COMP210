@@ -16,7 +16,7 @@ public class Main {
             avl_bst = avl_bst.insert((int) (Math.random()*100));
         }
         System.out.println(avl_bst.height());
-        System.out.println(avl_bst.size());
+        System.out.println("Size: "+ avl_bst.size());
 
         SelfBalancingBST<Integer> avl_bst2 = new AVLTree<Integer>();
         // Now insert 50 integers in increasing order which would
@@ -38,9 +38,9 @@ public class Main {
         avl_bst3 = avl_bst3.insert(10);
         avl_bst3 = avl_bst3.insert(58);
         System.out.println(avl_bst3.height());
-        // System.out.println(avl_bst3.size());
-        // System.out.println(avl_bst3.rangeContain(10,46));
-        // System.out.println(avl_bst3.rangeContain(4,6));
-        // System.out.println(avl_bst3.rangeContain(4,7));
+        System.out.println(avl_bst3.size());
+        System.out.println(avl_bst3.rangeContain(10,46));
+        System.out.println(avl_bst3.rangeContain(4,6));
+        System.out.println(avl_bst3.rangeContain(4,7));
     }
 }
